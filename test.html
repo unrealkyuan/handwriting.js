@@ -1,0 +1,44 @@
+
+<html>
+
+<head>
+	<script type="text/javascript" src="handwriting.canvas.js">
+		
+
+	</script>
+</head>
+
+<body>
+    <canvas id="can" width="400" height="400" style="border: 2px solid; cursor: crosshair;">
+    	<script>
+    	var can1 = new handwriting.Canvas(document.getElementById("can"));
+		    	//Set callback function
+		    can1.setCallBack(function(data, err) {
+		        	if(err) throw err;
+		        	else console.log(data);
+		    });
+
+		    //Set line width shown on the canvas element (default: 3)
+		    can1.setLineWidth(5);
+
+
+		    //Set options
+		    can1.setOptions(
+		        {
+		            language: "en",
+		            numOfReturn: 3
+		        }
+		    );
+
+		    //recognize captured trace
+		    can1.recognize(can1.trace, can1.options, can1.callback);
+
+			
+		    //Clear canvas, captured trace, and stored steps
+		    can1.erase();
+    	</script>
+    </canvas>
+</body>
+
+
+</html>
