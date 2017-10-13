@@ -2,20 +2,23 @@
 <html>
 
 <head>
-	<script type="text/javascript" src="handwriting.canvas.js">
-		
-
-	</script>
 </head>
-
+<script type="text/javascript" src="handwriting.canvas.js">
+</script>
 <body>
-    <canvas id="can" width="400" height="400" style="border: 2px solid; cursor: crosshair;">
-    	<script>
-    	var can1 = new handwriting.Canvas(document.getElementById("can"));
+    <canvas id="can" width="800" height="400" style="border: 2px solid; cursor: crosshair;">
+    </canvas>
+    <p id = "insert"></p>
+    <script>
+    		var words = 0;
+    		var can1 = new handwriting.Canvas(document.getElementById("can"));
 		    	//Set callback function
 		    can1.setCallBack(function(data, err) {
 		        	if(err) throw err;
-		        	else console.log(data);
+		        	else{
+		        		console.log(data);
+		        		document.getElementById("insert").innerHTML = data
+		        	}
 		    });
 
 		    //Set line width shown on the canvas element (default: 3)
@@ -25,19 +28,18 @@
 		    //Set options
 		    can1.setOptions(
 		        {
-		            language: "en",
 		            numOfReturn: 3
-		        }
+		         }
 		    );
 
-		    //recognize captured trace
-		    can1.recognize(can1.trace, can1.options, can1.callback);
 
 			
-		    //Clear canvas, captured trace, and stored steps
-		    can1.erase();
+		   
     	</script>
-    </canvas>
+    	<button onclick="handwriting.recognize(can1.trace, can1.options, can1.callback);">Recognize</button>
+    	
+
+    	<button onclick="can1.erase();">Erase</button>
 </body>
 
 
